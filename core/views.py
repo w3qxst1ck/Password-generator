@@ -3,6 +3,7 @@ import random
 
 from django.shortcuts import render
 from landind_app.settings import ALLOWED_HOSTS
+from core.models import Password
 
 
 def index(request):
@@ -33,8 +34,11 @@ def gen_password():
 
 def generate_password(request):
     password = gen_password()
+    Password.objects.create(password=password)
     url = 'http://' + ALLOWED_HOSTS[0] + '/generate-password'
+    passwrod_list = Password.objects.all()
     return render(request, 'core/password_created.html', context={
         'password': password,
-        'url': url
+        'url': url,
+        'password_list': passwrod_list
     })

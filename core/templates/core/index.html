@@ -27,6 +27,12 @@
                   </div>
                 </div>
             </div>
+            <div>
+                <h3>Generated passwords:</h3>
+                {% for pass in password_list %}
+                <span class="badge rounded-pill bg-dark">{{ pass.password }}</span>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </body>
