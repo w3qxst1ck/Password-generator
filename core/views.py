@@ -7,7 +7,8 @@ from core.models import Password
 
 
 def index(request):
-    return render(request, 'core/index.html')
+    password_list = Password.objects.all()
+    return render(request, 'core/index.html', context={'pasword_list': password_list})
 
 
 def gen_password():
