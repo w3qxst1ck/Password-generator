@@ -8,8 +8,8 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_USER=aleksandrandreev
-      - POSTGRES_PASSWORD=w3qxst1ck
+      - POSTGRES_USER=
+      - POSTGRES_PASSWORD=
       - POSTGRES_DB=gen_password_db
   backend:
     build: ./
@@ -22,6 +22,6 @@ services:
     ports:
     - 80:8000
     environment:
-      - SECRET_KEY=django-insecure-c+ebrz@g)1b4#9axj1vf-86%c@j=29^b0hgddoazm_g9xss4u4
-      - POSTGRES_PASSWORD=w3qxst1ck
-      - POSTGRES_USER=aleksandrandreev
+      - SECRET_KEY=
+      - POSTGRES_PASSWORD=
+      - POSTGRES_USER=
