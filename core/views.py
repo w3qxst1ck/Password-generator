@@ -8,7 +8,7 @@ from core.models import Password
 
 def index(request):
     password_list = Password.objects.all()
-    return render(request, 'core/index.html', context={'pasword_list': password_list})
+    return render(request, 'core/index.html', context={'password_list': password_list})
 
 
 def gen_password():
@@ -36,10 +36,8 @@ def gen_password():
 def generate_password(request):
     password = gen_password()
     Password.objects.create(password=password)
-    url = 'http://' + ALLOWED_HOSTS[0] + '/generate-password'
-    passwrod_list = Password.objects.all()
+    password_list = Password.objects.all()
     return render(request, 'core/password_created.html', context={
         'password': password,
-        'url': url,
-        'password_list': passwrod_list
+        'password_list': password_list
     })

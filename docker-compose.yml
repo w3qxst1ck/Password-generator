@@ -8,20 +8,33 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_USER=
+      - POSTGRES_USER=aleksandrandreev
       - POSTGRES_PASSWORD=
       - POSTGRES_DB=gen_password_db
   backend:
     build: ./
     command: bash -c "
-      python manage.py migrate
-      && python manage.py runserver 0.0.0.0:8000
+      python manage.py makemigrations
+      && python manage.py migrate
+      && python manage.py collectstatic
+      && exec gunicorn landind_app.wsgi:application -b 0.0.0.0:8000 --reload
       "
     depends_on:
       - db
     ports:
-    - 80:8000
+      - 8000:8000
     environment:
       - SECRET_KEY=
       - POSTGRES_PASSWORD=
-      - POSTGRES_USER=
+      - POSTGRES_USER=aleksandrandreev
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+      - backend
+    ports:
+      - 80:80
+    volumes:
+      - ./static/:/static
